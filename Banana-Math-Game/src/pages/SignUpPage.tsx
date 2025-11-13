@@ -62,22 +62,23 @@ function SignUp() {
         style={{
           position: "relative",
           zIndex: 2,
-          backgroundColor: "rgba(208, 194, 194, 0.8)",
+          backgroundColor: "rgba(199, 233, 210, 0.9)",
           padding: "40px",
           borderRadius: "15px",
           textAlign: "center",
           boxShadow: "0 4px 15px rgba(150, 81, 81, 0.2)",
-          width: "320px",
+          width: "400px",
+          height: "450px",
         }}
       >
 
         <h2
           style={{
             color: "#3d7f59",
-            fontSize: "28px",
+            fontSize: "50px",
             fontFamily: "'Poppins', sans-serif",
             fontWeight: 600,
-            marginBottom: "20px",
+            marginBottom: "70px",
           }}
         >
           Sign Up
@@ -89,8 +90,8 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           style={{
             display: "block",
-            width: "100%",
-            marginBottom: "15px",
+            width: "75%",
+            marginBottom: "20px",
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
@@ -104,8 +105,8 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           style={{
             display: "block",
-            width: "100%",
-            marginBottom: "15px",
+            width: "75%",
+            marginBottom: "20px",
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
@@ -119,8 +120,8 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           style={{
             display: "block",
-            width: "100%",
-            marginBottom: "20px",
+            width: "75%",
+            marginBottom: "70px",
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
