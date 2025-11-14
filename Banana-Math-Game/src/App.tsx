@@ -8,6 +8,7 @@ import Welcome from "./pages/welcomePage";
 import InstructionPage from "./pages/InstructionPage";
 import SettingsPage from "./pages/SettingPage"; 
 import LevelPage from "./pages/LevelsPage";
+import GamePage from "./pages/GamePage";
 
 
 // Import your pages
@@ -23,10 +24,11 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/Leaderboard" element={<Leaderboard />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/instructions" element={<InstructionPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/level" element={<LevelPage />} />
+        <Route path="/game" element={<GamePage selectedLevel="easy" />} />
 
 
       </Routes>

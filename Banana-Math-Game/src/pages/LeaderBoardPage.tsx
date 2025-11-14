@@ -48,7 +48,7 @@ function Leaderboard() {
     >
       <div
         style={{
-          backgroundColor: "rgba(199, 233, 210, 0.9)",
+          backgroundColor: "rgba(174, 241, 195, 0.56)",
           padding: "50px",
           borderRadius: "20px",
           textAlign: "center",

@@ -23,7 +23,7 @@ function LevelPage() {
     >
       <div
         style={{
-          backgroundColor: "rgba(199, 233, 210, 0.9)",
+          backgroundColor: "rgba(174, 241, 195, 0.56)",
           borderRadius: "25px",
           boxShadow: "0 10px 25px rgba(0,0,0,0.4)",
           width: "400px",

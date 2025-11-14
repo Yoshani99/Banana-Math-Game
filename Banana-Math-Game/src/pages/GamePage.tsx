@@ -1,0 +1,253 @@
+import React, { useState, useEffect, useRef } from "react";
+// @ts-ignore
+import { db, auth } from "../firebase/config";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+
+import GamePageBg from "../assets/LoginPage.png";
+
+// Loader Component
+const Loader: React.FC = () => (
+  <div className="flex items-center justify-center w-full h-48">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-600" />
+  </div>
+);
+
+type LevelType = "easy" | "medium" | "hard";
+
+interface GamePageProps {
+  selectedLevel: LevelType;
+}
+
+function GamePage({ selectedLevel }: GamePageProps) {
+  const levelTimes = { easy: 20, medium: 15, hard: 8 };
+  const levelLives = { easy: 5, medium: 3, hard: 3 };
+
+  const [timeLeft, setTimeLeft] = useState(levelTimes[selectedLevel]);
+  const [lives, setLives] = useState(levelLives[selectedLevel]);
+  const [imageData, setImageData] = useState<any>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+
+  const firstTimeDown = useRef(false);
+
+  // Save Score
+  const saveScore = async (scoreToAdd: number) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const username = user.displayName || "Player";
+    const userId = user.uid;
+    const userRef = doc(db, "scores", username);
+
+    try {
+      const userDoc = await getDoc(userRef);
+      let newScore = scoreToAdd;
+
+      if (userDoc.exists()) {
+        newScore += userDoc.data().highestScore || 0;
+      }
+
+      await setDoc(userRef, {
+        highestScore: newScore,
+        username,
+        userId,
+      });
+
+      setCurrentScore(newScore);
+    } catch (error) {
+      console.error("🔥 Error saving score:", error);
+    }
+  };
+
+  // Fetch Puzzle
+  const fetchImage = async () => {
+    try {
+      const res = await fetch("https://marcconrad.com/uob/banana/api.php");
+      const data = await res.json();
+      setImageData(data);
+      setIsImageLoaded(true);
+      setHasStarted(true);
+    } catch (error) {
+      console.error("Error fetching question:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!hasStarted) fetchImage();
+  }, [hasStarted]);
+
+
+  // Timer
+  useEffect(() => {
+    if (lives === 0 || !isImageLoaded) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev > 0) return prev - 1;
+
+        if (!firstTimeDown.current) {
+          firstTimeDown.current = true;
+          return 0;
+        }
+
+        if (lives > 1) {
+          setLives((l) => l - 1);
+          firstTimeDown.current = false;
+          fetchImage();
+          return levelTimes[selectedLevel];
+        } else {
+          setLives(0);
+          saveScore(currentScore);
+          clearInterval(timer);
+        }
+
+        return 0;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [lives, selectedLevel, isImageLoaded, currentScore]);
+
+
+  // Answer Click
+  const handleAnswerSelection = (number: number) => {
+    if (lives === 0 || !imageData) return;
+
+    setSelectedAnswer(number);
+
+    if (number === imageData.solution) {
+      const scoreBonus =
+        selectedLevel === "easy" ? 10 : selectedLevel === "medium" ? 20 : 35;
+
+      const newScore = currentScore + scoreBonus;
+      setCurrentScore(newScore);
+      saveScore(scoreBonus);
+      setIsCorrect(true);
+
+      setTimeout(() => {
+        fetchImage();
+        setSelectedAnswer(null);
+        setIsCorrect(null);
+        setTimeLeft(levelTimes[selectedLevel]);
+      }, 1000);
+    } else {
+      setIsCorrect(false);
+      setIncorrectAnswers((prev) => prev + 1);
+      if (lives > 1) setLives(lives - 1);
+      else setLives(0);
+
+      setTimeout(() => {
+        fetchImage();
+        setSelectedAnswer(null);
+        setIsCorrect(null);
+        setTimeLeft(levelTimes[selectedLevel]);
+      }, 1000);
+    }
+  };
+
+
+  // Restart Game
+  const handleRestart = () => {
+    setLives(levelLives[selectedLevel]);
+    setTimeLeft(levelTimes[selectedLevel]);
+    setIncorrectAnswers(0);
+    setCurrentScore(0);
+    fetchImage();
+  };
+
+
+  return (
+    <div
+      className="flex flex-col items-center justify-start w-screen h-screen p-6"
+      style={{
+        backgroundImage: `url(${GamePageBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        fontFamily: "Poppins, sans-serif",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      {/* Header */}
+      <div className="bg-yellow-500 text-white px-8 py-4 rounded-xl shadow-xl mb-8">
+        <h2 className="text-6xl font-extrabold drop-shadow-lg capitalize">
+          {selectedLevel} Level
+        </h2>
+      </div>
+
+      {/* Game Box */}
+      <div className="bg-white bg-opacity-90 p-10 rounded-3xl shadow-2xl w-[850px] max-w-[95%] border-4 border-yellow-400">
+        
+        <div className="flex justify-between mb-8 text-2xl font-bold">
+          <div className="bg-green-200 px-4 py-2 rounded-lg shadow">
+            Lives: {lives > 0 ? "❤️".repeat(lives) : "💀 Game Over"}
+          </div>
+
+          <div className="bg-yellow-200 px-4 py-2 rounded-lg shadow">
+            Time: {timeLeft}s
+          </div>
+
+          <div className="bg-blue-200 px-4 py-2 rounded-lg shadow">
+            Score: {currentScore}
+          </div>
+        </div>
+
+        <div className="flex justify-center mb-6">
+          {imageData ? (
+            <img
+              src={imageData.question}
+              alt="Math Puzzle"
+              className="rounded-xl shadow-xl w-[420px]"
+            />
+          ) : (
+            <Loader />
+          )}
+        </div>
+
+        <div className="flex justify-center mb-6 flex-wrap gap-4">
+          {Array.from({ length: 10 }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => handleAnswerSelection(i)}
+              className={`w-[70px] h-[55px] text-2xl font-bold rounded-xl shadow-lg transition-all duration-300 ${
+                selectedAnswer === i
+                  ? isCorrect
+                    ? "bg-green-600 text-white"
+                    : "bg-red-600 text-white"
+                  : "bg-yellow-500 text-white hover:bg-yellow-700"
+              }`}
+            >
+              {i}
+            </button>
+          ))}
+        </div>
+
+        {isCorrect !== null && (
+          <div className="text-center mb-6 text-3xl font-bold">
+            {isCorrect ? (
+              <p className="text-green-700">✅ Correct!</p>
+            ) : (
+              <p className="text-red-600">❌ Try Again!</p>
+            )}
+          </div>
+        )}
+
+        <div className="text-center">
+          <button
+            onClick={handleRestart}
+            className="bg-green-600 text-white text-2xl px-8 py-4 rounded-xl shadow-lg hover:bg-green-800"
+          >
+            🔄 Restart
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default GamePage;

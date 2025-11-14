@@ -22,7 +22,7 @@ function InstructionPage() {
       <div
         style={{
           maxWidth: "750px",
-          backgroundColor: "rgba(199, 233, 210, 0.9)",
+          backgroundColor: "rgba(174, 241, 195, 0.56)",
           borderRadius: "20px",
           padding: "40px 50px",
           textAlign: "center",
@@ -31,9 +31,9 @@ function InstructionPage() {
       >
         <h1
           style={{
-            fontSize: "48px",
-            color: "#f1c40f",
-            marginBottom: "30px",
+            fontSize: "52px",
+            color: "#f09c16ff",
+            marginBottom: "35px",
             textShadow: "2px 2px 6px rgba(0,0,0,0.3)",
           }}
         >

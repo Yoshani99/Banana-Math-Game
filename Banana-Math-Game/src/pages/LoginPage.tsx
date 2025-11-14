@@ -3,6 +3,7 @@ import { useState, type ChangeEvent } from "react";
 // @ts-ignore: Module '../firebase/config' has no type declarations
 import { auth } from "../firebase/config";
 import LoginPageImg from "../assets/loginpage.png";
+import GoogleLogo from "../assets/google-logo.png";
 
 function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -45,7 +46,7 @@ function LoginPage() {
     >
       <div
         style={{
-          backgroundColor: "rgba(199, 233, 210, 0.9)",
+          backgroundColor: "rgba(174, 241, 195, 0.56)",
           padding: "50px 40px",
           borderRadius: "20px",
           textAlign: "center",
@@ -130,6 +131,14 @@ function LoginPage() {
           }
         >
           Login
+        </button>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-white text-white font-bold text-xl px-6 py-3 rounded-lg mt-6 shadow-lg flex items-center justify-center font-dancingScript"
+        >
+          {/* Google Logo */}
+          <img src={GoogleLogo} alt="Google Logo" className="w-8 h-8" />
         </button>
       </div>
     </div>

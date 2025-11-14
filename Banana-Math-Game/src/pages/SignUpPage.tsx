@@ -52,7 +52,6 @@ function SignUp() {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.4)", // dim overlay
           zIndex: 1,
         }}
       ></div>
@@ -62,7 +61,7 @@ function SignUp() {
         style={{
           position: "relative",
           zIndex: 2,
-          backgroundColor: "rgba(199, 233, 210, 0.9)",
+          backgroundColor: "rgba(174, 241, 195, 0.56)",
           padding: "40px",
           borderRadius: "15px",
           textAlign: "center",
@@ -90,7 +89,7 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           style={{
             display: "block",
-            width: "75%",
+            width: "95%",
             marginBottom: "20px",
             padding: "10px",
             borderRadius: "8px",
@@ -105,7 +104,7 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           style={{
             display: "block",
-            width: "75%",
+            width: "95%",
             marginBottom: "20px",
             padding: "10px",
             borderRadius: "8px",
@@ -120,7 +119,7 @@ function SignUp() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           style={{
             display: "block",
-            width: "75%",
+            width: "95%",
             marginBottom: "70px",
             padding: "10px",
             borderRadius: "8px",
