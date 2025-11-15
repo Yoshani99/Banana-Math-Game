@@ -45,7 +45,7 @@ function LoginPage() {
       localStorage.setItem("userEmail", user.email || "");
 
       toast.success("Successfully logged in!", { position: "top-center", autoClose: 3000 });
-      navigate("/instructions");
+      navigate("/mainmenu");
     } catch (error: any) {
       toast.error(error.message, { position: "top-center", autoClose: 3000 });
     }
@@ -134,6 +134,8 @@ function LoginPage() {
             fontSize: "16px",
             outline: "none",
             transition: "0.3s",
+            backgroundColor: "white",
+            color: "black",
           }}
           onFocus={(e) => (e.target.style.border = "2px solid #81c784")}
           onBlur={(e) => (e.target.style.border = "2px solid #c5e1a5")}
@@ -154,6 +156,8 @@ function LoginPage() {
             fontSize: "16px",
             outline: "none",
             transition: "0.3s",
+             backgroundColor: "white",
+             color: "black",
           }}
           onFocus={(e) => (e.target.style.border = "2px solid #81c784")}
           onBlur={(e) => (e.target.style.border = "2px solid #c5e1a5")}
@@ -189,11 +193,11 @@ function LoginPage() {
         <button
           onClick={handleGoogleLogin}
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff2f",
             color: "#2e7d32",
             fontWeight: "bold",
             fontSize: "16px",
-            padding: "10px 20px",
+            padding: "5px 28px",
             borderRadius: "10px",
             border: "1px solid #ccc",
             display: "flex",
@@ -201,6 +205,9 @@ function LoginPage() {
             justifyContent: "center",
             gap: "10px",
             cursor: "pointer",
+            margin: "0 auto",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            transition: "all 0.3s ease",
           }}
         >
           <img src={GoogleLogo} alt="Google Logo" style={{ width: "30px", height: "30px" }} />

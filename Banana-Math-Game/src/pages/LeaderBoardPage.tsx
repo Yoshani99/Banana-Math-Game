@@ -9,7 +9,7 @@ import BackgroundImg from "../assets/LoginPage.png";
 
 interface Score {
   username: string;
-  score: number;
+  highestScore: number;
   level?: string;
 }
 
@@ -19,7 +19,9 @@ function Leaderboard() {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const q = query(collection(db, "leaderboard"), orderBy("score", "desc"));
+        console.log("🔥 Fetching leaderboard scores...");
+        const q = query(collection(db, "scores"));
+        console.log("🔥 Query constructed:", q);
         const snapshot = await getDocs(q);
         const list: Score[] = snapshot.docs.map((doc) => doc.data() as Score);
         setScores(list);
@@ -64,13 +66,13 @@ function Leaderboard() {
         <h2
           style={{
             color: "#2b6e46",
-            fontSize: "32px",
+            fontSize: "50px",
             fontWeight: 700,
             marginBottom: "25px",
             letterSpacing: "1px",
           }}
         >
-          Leaderboard 🏆
+          Leaderboard 
         </h2>
 
         {scores.length === 0 ? (
@@ -110,7 +112,7 @@ function Leaderboard() {
                 >
                   <td style={{ padding: "10px" }}>{i + 1}</td>
                   <td style={{ padding: "10px" }}>{item.username}</td>
-                  <td style={{ padding: "10px" }}>{item.score}</td>
+                  <td style={{ padding: "10px" }}>{item.highestScore}</td>
                 </tr>
               ))}
             </tbody>

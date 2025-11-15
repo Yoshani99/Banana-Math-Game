@@ -75,6 +75,11 @@ console.log("User created and profile updated:", user);
     } catch (error: any) {
       const errorMessage = error.message;
       if (errorMessage.includes("email already in use")) {
+        console.log("Email already in use error caught.");
+      }
+
+      if (errorMessage.includes("email already in use"))
+     {
         toast.error("This email is already registered.", {
           position: "top-center",
           autoClose: 3000,
@@ -182,6 +187,8 @@ console.log("User created and profile updated:", user);
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
+            backgroundColor: "white",
+            color: "black",
           }}
         />
 
@@ -197,6 +204,8 @@ console.log("User created and profile updated:", user);
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
+            backgroundColor: "white",
+            color: "black",
           }}
         />
 
@@ -212,7 +221,11 @@ console.log("User created and profile updated:", user);
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
+            backgroundColor: "white",
+            color: "black",
+            backdropFilter: "white(10px)",
           }}
+
         />
 
         <input
@@ -227,6 +240,8 @@ console.log("User created and profile updated:", user);
             padding: "10px",
             borderRadius: "8px",
             border: "1px solid #ccc",
+             backgroundColor: "white",
+             color: "black",
           }}
         />
 
@@ -245,19 +260,30 @@ console.log("User created and profile updated:", user);
         >
           Sign Up
         </button><br/><br/>
-        
- <button
+          <button
           onClick={handleGoogleSignUp}
-          className="bg-white text-white font-bold text-xl px-6 py-3 rounded-lg mt-6 shadow-lg flex items-center justify-center gap-4 font-dancingScript"
+          style={{
+            backgroundColor: "#ffffff2f",
+            color: "#2e7d32",
+            fontWeight: "bold",
+            fontSize: "16px",
+            padding: "5px 28px",
+            borderRadius: "10px",
+            border: "1px solid #ccc",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            cursor: "pointer",
+            margin: "0 auto",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            transition: "all 0.3s ease",
+          }}
         >
-          {/* Google Logo */}
-          <img 
-            src={GoogleLogo}
-            alt="Google Logo" 
-            style={{ width: "30px", height: "30px" }}
-          //  className="w-1 h-1" 
-          />
+          <img src={GoogleLogo} alt="Google Logo" style={{ width: "30px", height: "30px" }} />
+          SignUp  with Google
         </button>
+
 
         <p style={{ marginTop: "20px", fontSize: "14px", color: "#2e7d32" }}>
        Already have an account?{" "}

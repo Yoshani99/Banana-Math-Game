@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LevelPageBg from "../assets/LoginPage.png";
-
 
 function LevelPage() {
   const [selectedLevel, setSelectedLevel] = useState("Easy");
+  const navigate = useNavigate();
+
+  const handleConfirm = () => {
+    navigate("/game", {
+      state: { selectedLevel },
+    });
+  };
 
   return (
     <div
@@ -12,100 +19,57 @@ function LevelPage() {
         width: "100vw",
         backgroundImage: `url(${LevelPageBg})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         fontFamily: "'Poppins', sans-serif",
-        color: "#2b6e46",
-        position: "fixed",
-       
       }}
     >
       <div
         style={{
-          backgroundColor: "rgba(174, 241, 195, 0.56)",
+          background: "rgba(174, 241, 195, 0.56)",
           borderRadius: "25px",
-          boxShadow: "0 10px 25px rgba(0,0,0,0.4)",
-          width: "400px",
           padding: "50px 35px",
+          width: "400px",
           textAlign: "center",
           backdropFilter: "blur(8px)",
-          position: "relative",
-          marginLeft: "20px",
-          marginRight: "300px",
-          marginBottom: "50px",
-          
+          color: "#2e7d32",
+          marginRight: "300px", 
         }}
       >
-        {/* Page Title */}
-        <h1
-          style={{
-            fontSize: "50px",
-            fontWeight: "800",
-            color: "#2e7d32",
-            marginBottom: "30px",
-            textShadow: "2px 2px 6px rgba(0,0,0,0.25)",
-            letterSpacing: "1px",
-          }}
-        >
-          Select Level
-        </h1>
+        <h1 style={{ fontSize: "50px", fontWeight: "800" }}>Select Level</h1>
 
-        {/* Level Options */}
         {["Easy", "Medium", "Hard"].map((level) => (
           <div
             key={level}
             onClick={() => setSelectedLevel(level)}
             style={{
               display: "flex",
-              alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor:
-                selectedLevel === level ? "#a9efa0ff" : "rgba(255,255,255,0.8)",
-              border: "2px solid #20cc68ff",
-              borderRadius: "15px",
-              padding: "15px 25px",
+              padding: "8px 25px",
               marginBottom: "18px",
-              fontSize: "22px",
-              fontWeight: "600",
-              color: selectedLevel === level ? "#2b6e46" : "#444",
               cursor: "pointer",
-              transition: "all 0.3s ease",
-              boxShadow:
-                selectedLevel === level
-                  ? "0 4px 10px rgba(101, 211, 50, 0.3)"
-                  : "none",
+              backgroundColor:
+                selectedLevel === level ? "#92e887ff" : "rgba(255,255,255,0.8)",
+              border: "2px solid #20cc68",
+              borderRadius: "15px",
             }}
           >
             <span>{level}</span>
-            <span>{selectedLevel === level ? "✔️" : ""}</span>
+            {selectedLevel === level && <span>✔️</span>}
           </div>
         ))}
 
-        {/* Confirm Button */}
         <button
+          onClick={handleConfirm}
           style={{
             backgroundColor: "#3d7f59",
-            color: "#fff",
-            border: "none",
-            borderRadius: "12px",
             padding: "14px 40px",
-            fontSize: "20px",
-            fontWeight: "bold",
+            color: "white",
+            borderRadius: "12px",
+            marginTop: "20px",
             cursor: "pointer",
-            boxShadow: "0 6px 15px rgba(0,0,0,0.3)",
-            marginTop: "25px",
-            transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e6546")
-          }
-          onMouseOut={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#3d7f59")
-          }
-          onClick={() => alert(`Selected Level: ${selectedLevel}`)}
         >
           Confirm
         </button>

@@ -75,12 +75,12 @@ function Profile() {
         <h2
           style={{
             color: "#2b6e46",
-            fontSize: "32px",
+            fontSize: "50px",
             fontWeight: 700,
             marginBottom: "25px",
           }}
         >
-          My Profile 👤
+          My Profile 
         </h2>
 
         {loading ? (
