@@ -12,15 +12,15 @@ const Loader: React.FC = () => (
   </div>
 );
 
-type LevelType = "easy" | "medium" | "hard";
+type LevelType = "Easy" | "Medium" | "Hard";
 
 interface GamePageProps {
   selectedLevel: LevelType;
 }
 
 function GamePage({ selectedLevel }: GamePageProps) {
-  const levelTimes = { easy: 20, medium: 15, hard: 8 };
-  const levelLives = { easy: 5, medium: 3, hard: 3 };
+  const levelTimes: Record<LevelType, number> = { Easy: 20, Medium: 15, Hard: 8 };
+  const levelLives: Record<LevelType, number> = { Easy: 5, Medium: 3, Hard: 3 };
 
   const [timeLeft, setTimeLeft] = useState(levelTimes[selectedLevel]);
   const [lives, setLives] = useState(levelLives[selectedLevel]);
@@ -121,7 +121,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
 
     if (number === imageData.solution) {
       const scoreBonus =
-        selectedLevel === "easy" ? 10 : selectedLevel === "medium" ? 20 : 35;
+        selectedLevel === "Easy" ? 10 : selectedLevel === "Medium" ? 20 : 35;
 
       const newScore = currentScore + scoreBonus;
       setCurrentScore(newScore);
@@ -171,17 +171,21 @@ function GamePage({ selectedLevel }: GamePageProps) {
         fontFamily: "Poppins, sans-serif",
         width: "100vw",
         height: "100vh",
+        position: "fixed",
+       
       }}
     >
       {/* Header */}
       <div className="bg-yellow-500 text-white px-8 py-4 rounded-xl shadow-xl mb-8">
-        <h2 className="text-6xl font-extrabold drop-shadow-lg capitalize">
+        <h2 className="text-6xl font-extrabold drop-shadow-lg capitalize" style={{ fontFamily: "'Poppins', sans-serif",position: "relative",
+        marginLeft: "250px"}}>
           {selectedLevel} Level
         </h2>
       </div>
 
       {/* Game Box */}
-      <div className="bg-white bg-opacity-90 p-10 rounded-3xl shadow-2xl w-[850px] max-w-[95%] border-4 border-yellow-400">
+      <div className="bg-white bg-opacity-90 p-10 rounded-3xl shadow-2xl w-[850px] max-w-[95%] border-4 border-yellow-400" style={{ fontFamily: "'Poppins', sans-serif", position: "relative",
+        marginLeft: "250px", }}>
         
         <div className="flex justify-between mb-8 text-2xl font-bold">
           <div className="bg-green-200 px-4 py-2 rounded-lg shadow">

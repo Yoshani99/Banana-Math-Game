@@ -19,6 +19,8 @@ function LevelPage() {
         justifyContent: "center",
         fontFamily: "'Poppins', sans-serif",
         color: "#2b6e46",
+        position: "fixed",
+       
       }}
     >
       <div
@@ -30,14 +32,19 @@ function LevelPage() {
           padding: "50px 35px",
           textAlign: "center",
           backdropFilter: "blur(8px)",
+          position: "relative",
+          marginLeft: "20px",
+          marginRight: "300px",
+          marginBottom: "50px",
+          
         }}
       >
         {/* Page Title */}
         <h1
           style={{
-            fontSize: "40px",
+            fontSize: "50px",
             fontWeight: "800",
-            color: "#3d7f59",
+            color: "#2e7d32",
             marginBottom: "30px",
             textShadow: "2px 2px 6px rgba(0,0,0,0.25)",
             letterSpacing: "1px",

@@ -17,6 +17,7 @@ function InstructionPage() {
         justifyContent: "center",
         padding: "40px 20px",
         width: "100vw",
+        position: "fixed",
       }}
     >
       <div
@@ -27,12 +28,17 @@ function InstructionPage() {
           padding: "40px 50px",
           textAlign: "center",
           boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+          backdropFilter: "blur(10px)",
+          position: "relative",
+          marginLeft: "20px",
+          marginRight: "300px",
+          marginBottom: "80px",
         }}
       >
         <h1
           style={{
             fontSize: "52px",
-            color: "#f09c16ff",
+            color: "#3b137fff",
             marginBottom: "35px",
             textShadow: "2px 2px 6px rgba(0,0,0,0.3)",
           }}
@@ -59,8 +65,8 @@ function InstructionPage() {
 
         <h2
           style={{
-            fontSize: "32px",
-            color: "#3d7f59",
+            fontSize: "40px",
+            color: "#0b5c2dff",
             marginBottom: "15px",
             textShadow: "1px 1px 4px rgba(0,0,0,0.1)",
           }}
@@ -97,7 +103,7 @@ function InstructionPage() {
             border: "none",
             borderRadius: "10px",
             padding: "14px 45px",
-            fontSize: "18px",
+            fontSize: "25px",
             fontWeight: "bold",
             cursor: "pointer",
             boxShadow: "0 6px 15px rgba(0,0,0,0.2)",

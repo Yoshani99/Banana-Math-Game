@@ -31,6 +31,7 @@ function SettingsPage() {
         alignItems: "center",
         justifyContent: "center",
         padding: "30px",
+        position: "fixed",
       }}
     >
       <div
@@ -42,6 +43,10 @@ function SettingsPage() {
           textAlign: "center",
           width: "420px",
           backdropFilter: "blur(8px)",
+            position: "relative",
+          marginLeft: "20px",
+          marginRight: "360px",
+          marginBottom: "70px",
         }}
       >
         <h1

@@ -55,6 +55,10 @@ function Leaderboard() {
           boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
           width: "400px",
           backdropFilter: "blur(8px)",
+             position: "relative",
+          marginLeft: "20px",
+          marginRight: "360px",
+          marginBottom: "70px",
         }}
       >
         <h2

@@ -41,8 +41,8 @@ function Welcome() {
             fontWeight: 800,
             marginBottom: "50px",
             letterSpacing: "2px",
-            color: "#bde655ff", // bright yellow for banana theme
-            textShadow: "2px 2px 10px rgba(215, 40, 40, 0.6)",
+            color: "#ef2727ff", // bright yellow for banana theme
+            textShadow: "2px 2px 10px rgba(15, 9, 170, 0.6)",
           }}
         >
           Banana Math
@@ -53,7 +53,7 @@ function Welcome() {
             fontSize: "50px",
             fontWeight: 400,
             marginBottom: "40px",
-            color: "#fff",
+            color: "#5209eeff",
             textShadow: "1px 1px 5px rgba(0,0,0,0.5)",
           }}
         >
@@ -67,7 +67,7 @@ function Welcome() {
               padding: "12px 30px",
               border: "none",
               borderRadius: "15px",
-              backgroundColor: "#3d7f59",
+              backgroundColor: "#19c87cff",
               color: "white",
               fontWeight: "bold",
               fontSize: "20px",
@@ -90,7 +90,7 @@ function Welcome() {
               padding: "12px 30px",
               border: "none",
               borderRadius: "15px",
-              backgroundColor: "#3d7f59",
+              backgroundColor: "#19c87cff",
               color: "#f6f1f1ff",
               fontWeight: "bold",
               fontSize: "20px",

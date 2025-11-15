@@ -54,6 +54,7 @@ function Profile() {
         justifyContent: "center",
         alignItems: "center",
         fontFamily: "'Poppins', sans-serif",
+        position: "fixed",
       }}
     >
       <div
@@ -65,6 +66,10 @@ function Profile() {
           boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
           width: "400px",
           backdropFilter: "blur(8px)",
+           position: "relative",
+          marginLeft: "20px",
+          marginRight: "300px",
+          marginBottom: "50px",
         }}
       >
         <h2
