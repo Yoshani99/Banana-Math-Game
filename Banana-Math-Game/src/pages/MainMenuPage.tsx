@@ -4,7 +4,7 @@ import InstructionPage from "./InstructionPage";
 import LevelPage from "./LevelsPage";
 import SettingPage from "./SettingPage";
 import LeaderboardPage from "./LeaderBoardPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./profilePage";
 
 type MenuPage =
   | "game"
