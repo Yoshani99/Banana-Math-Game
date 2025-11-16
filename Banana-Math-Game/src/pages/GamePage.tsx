@@ -1,115 +1,3 @@
-// import { useLocation } from "react-router-dom";
-// import React, { useEffect, useState, useRef } from "react";
-// import GamePageBg from "../assets/LoginPage.png";
-
-// type LevelType = "Easy" | "Medium" | "Hard";
-
-// export default function GamePage() {
-//   const location = useLocation();
-//   const selectedLevel: LevelType = location.state?.selectedLevel || "Easy";
-
-//   const levelTimes = { Easy: 20, Medium: 15, Hard: 8 };
-//   const levelLives = { Easy: 5, Medium: 3, Hard: 3 };
-
-//   const [timeLeft, setTimeLeft] = useState(levelTimes[selectedLevel]);
-//   const [lives, setLives] = useState(levelLives[selectedLevel]);
-//   const [imageData, setImageData] = useState<any>(null);
-
-//   const fetchImage = async () => {
-//     const res = await fetch("https://marcconrad.com/uob/banana/api.php");
-//     const data = await res.json();
-//     setImageData(data);
-//   };
-
-//   useEffect(() => {
-//     fetchImage();
-//   }, []);
-
-//   return (
-//     <div
-//       style={{
-//         height: "100vh",
-//         width: "100vw",
-//         backgroundImage: `url(${GamePageBg})`,
-//         backgroundSize: "cover",
-//         padding: "25px",
-//       }}
-//     >
-//       {/* <h1
-//         style={{
-//           fontSize: "50px",
-//           textAlign: "center",
-//           color: "#040904ff",
-//           fontWeight: "800",
-//           marginBottom: "30px",
-//         }}
-//       >
-//         {selectedLevel} Level
-//       </h1> */}
-
-//       <div
-//         style={{
-//           width: "800px",
-//           margin: "0 auto",
-//           padding: "40px",
-//           backgroundColor: "rgba(36, 136, 51, 0.9)",
-//           borderRadius: "20px",
-//           textAlign: "center",
-//         }}
-//       >
-//         <h1> {selectedLevel} Level</h1>
-//        <div style={{ display: "flex", justifyContent: "center", gap: "140px", fontSize: "24px", fontWeight: "bold" }}>
-//   <span>⏳ Time Left: {timeLeft}s</span>
-//   <span>❤️ Lives: {"❤️".repeat(lives)}</span>
-// </div>
-
-//         {imageData ? (
-//           <img src={imageData.question} width={550} height={300} />
-//         ) : (
-//           <p>Loading puzzle...</p>
-//         )}
-
-//         <div style={{ marginTop: "25px" }}>
-//           {Array.from({ length: 10 }, (_, i) => (
-//             <button
-//               key={i}
-//               style={{
-//                 margin: "8px",
-//                 padding: "18px 28px",
-//                 fontSize: "15px",
-//                 borderRadius: "12px",
-//                 backgroundColor: "#ffc107",
-//                 border: "none",
-//                 cursor: "pointer",
-//                 color: "black",
-//               }}
-//             >
-//               {i}
-//             </button>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import React, { useState, useEffect, useRef } from "react";
 // @ts-ignore
@@ -118,7 +6,7 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 
 import GamePageBg from "../assets/LoginPage.png";
 
-// Loader Component
+// Loader Component(loading animation)
 const Loader: React.FC = () => (
   <div className="flex items-center justify-center w-full h-48">
     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-600" />
@@ -135,46 +23,59 @@ function GamePage({ selectedLevel }: GamePageProps) {
   const levelTimes: Record<LevelType, number> = { Easy: 20, Medium: 15, Hard: 8 };
   const levelLives: Record<LevelType, number> = { Easy: 5, Medium: 3, Hard: 3 };
 
+  //countdown timer and lives
   const [timeLeft, setTimeLeft] = useState(levelTimes[selectedLevel]);
   const [lives, setLives] = useState(levelLives[selectedLevel]);
+
+  //puzzle image and answer states
   const [imageData, setImageData] = useState<any>(null);
+
+  //selected answer and correctness states
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+
+  //track if the answer is correct
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+  //image loading and game start states
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+
+  //score and incorrect answers states
   const [currentScore, setCurrentScore] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
 
   const firstTimeDown = useRef(false);
 
-  // Save Score
+  // firebase Score Save function
   const saveScore = async (scoreToAdd: number) => {
         try {
-    console.log("🔥 Saving Score:", scoreToAdd) ;
+    console.log("Saving Score:", scoreToAdd) ;
     const user = auth.currentUser;
     console.log(" Current User:", user) ;
     if (!user) return;
-console.log("🔥 User is authenticated:", user.uid) ;
+
+    console.log("User is authenticated:", user.uid) ;
     const username = user.displayName || "Player";
     const userId = user.uid;
-    console.log("🔥 Username:", username, "UserID:", userId) ;
+
+    console.log("Username:", username, "UserID:", userId) ;
     const userRef = doc(db, "scores", username);
-console.log("🔥 User Document Reference:", userRef) ;
+    console.log("User Document Reference:", userRef) ;
 
       const userDoc = await getDoc(userRef);
-      console.log("🔥 Retrieved User Document:", userDoc.exists() ? userDoc.data() : "No document found");
+      console.log(" Retrieved User Document:", userDoc.exists() ? userDoc.data() : "No document found");
       let newScore = scoreToAdd;
 
       if (userDoc.exists()) {
         newScore += userDoc.data().highestScore || 0;
       }
-console.log("🔥 New Score to be saved:", newScore);
+      console.log("New Score to be saved:", newScore);
       await setDoc(userRef, {
         highestScore: newScore,
         username,
         userId,
       });
-      console.log("🔥 Score saved successfully for", username)  ;
+      console.log("Score saved successfully for", username)  ;
 
       setCurrentScore(newScore);
     } catch (error) {
@@ -311,7 +212,8 @@ console.log("🔥 New Score to be saved:", newScore);
             Lives: {lives > 0 ? "❤️".repeat(lives) : "💀 Game Over"}
           </div>
 
-          <div className="bg-yellow-200 px-4 py-2 rounded-lg shadow">
+        {/*timer show */}
+          <div className="bg-yellow-200 px-4 py-2 rounded-lg shadow">  
             Time: {timeLeft}s
           </div>
 

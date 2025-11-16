@@ -8,16 +8,16 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>(""); //variable store
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);  // change function
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
   const loginUser = async () => {
-    console.log("Attempting to log in with email:", email, "and password:", password);
+    console.log("Attempting to log in with email:", email, "and password:", password); //login check
 
     if (!email) {
       toast.error("Please enter your email.", { position: "top-center", autoClose: 3000 });
@@ -36,7 +36,7 @@ function LoginPage() {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); //sign in function
       const user = userCredential.user;
 
       localStorage.setItem("savedEmail", user.email || "");
@@ -51,7 +51,7 @@ function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {   //firebase google login
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -69,7 +69,7 @@ function LoginPage() {
             autoClose: 3000,
           });
 
-          navigate("/mainmenu");
+          navigate("/mainmenu"); // Redirect to main menu after successful login
         });
       })
       .catch((error) => {
@@ -179,7 +179,7 @@ function LoginPage() {
             transition: "all 0.3s ease",
           }}
           onMouseOver={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e7d32")
+            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e7d32") //hover effect
           }
           onMouseOut={(e) =>
             ((e.target as HTMLButtonElement).style.backgroundColor = "#43a047")
