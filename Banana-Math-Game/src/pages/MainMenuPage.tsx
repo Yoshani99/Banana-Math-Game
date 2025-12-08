@@ -34,7 +34,7 @@ export default function MainMenu() {  // display profile page
       case "profile":
          return <ProfilePage />;
         //   case "game":
-        //  return <GamePage selectedLevel="Easy" />;
+        //  return <GamePage/>;
 
       default:
             return <ProfilePage />;

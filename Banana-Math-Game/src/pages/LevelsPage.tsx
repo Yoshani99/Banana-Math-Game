@@ -2,14 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LevelPageBg from "../assets/LoginPage.png";
 
+// type LevelType = "Easy" | "Medium" | "Hard";
+
 function LevelPage() {
   const [selectedLevel, setSelectedLevel] = useState("Easy");
   const navigate = useNavigate();
 
   const handleConfirm = () => {
     navigate("/game", {
+      
       state: { selectedLevel },
     });
+    console.log("Navigating to GamePage with level:", selectedLevel);
   };
 
   return (
@@ -53,7 +57,9 @@ function LevelPage() {
                 selectedLevel === level ? "#92e887ff" : "rgba(255,255,255,0.8)",
               border: "2px solid #20cc68",
               borderRadius: "15px",
+            
             }}
+          
           >
             <span>{level}</span>
             {selectedLevel === level && <span>✔️</span>}
@@ -62,6 +68,7 @@ function LevelPage() {
 
         <button
           onClick={handleConfirm}
+          
           style={{
             backgroundColor: "#3d7f59",
             padding: "14px 40px",
@@ -71,6 +78,7 @@ function LevelPage() {
             cursor: "pointer",
           }}
         >
+          
           Confirm
         </button>
       </div>

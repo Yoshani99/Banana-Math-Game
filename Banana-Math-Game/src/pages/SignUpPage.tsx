@@ -53,13 +53,13 @@ console.log("Password strength validation passed.");
       const user = userCredential.user;
  console.log("User created with UID:", user.uid);
 
-      // Store additional user info in Firestore
-      // await setDoc(doc(db, "users", user.uid), {
-      //   username,
-      //   email,
-      //   score: 0,
-      //   completedLevel: "Easy",
-      // });
+    //  Store additional user info in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        username,
+        email,
+        score: 0,
+        completedLevel: "Easy",
+      });
 // console.log("User document created in Firestore for UID:", user.uid);
 //       await updateProfile(user, {
 //         displayName: username,
