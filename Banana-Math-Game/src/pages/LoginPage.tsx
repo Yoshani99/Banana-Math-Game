@@ -8,16 +8,16 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>(""); //variable store
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);  // change function
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
   const loginUser = async () => {
-    console.log("Attempting to log in with email:", email, "and password:", password);
+    console.log("Attempting to log in with email:", email, "and password:", password); //login check
 
     if (!email) {
       toast.error("Please enter your email.", { position: "top-center", autoClose: 3000 });
@@ -36,7 +36,7 @@ function LoginPage() {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); //sign in function
       const user = userCredential.user;
 
       localStorage.setItem("savedEmail", user.email || "");
@@ -45,13 +45,13 @@ function LoginPage() {
       localStorage.setItem("userEmail", user.email || "");
 
       toast.success("Successfully logged in!", { position: "top-center", autoClose: 3000 });
-      navigate("/instructions");
+      navigate("/mainmenu");
     } catch (error: any) {
       toast.error(error.message, { position: "top-center", autoClose: 3000 });
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {   //firebase google login
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -69,7 +69,7 @@ function LoginPage() {
             autoClose: 3000,
           });
 
-          navigate("/mainmenu");
+          navigate("/mainmenu"); // Redirect to main menu after successful login
         });
       })
       .catch((error) => {
@@ -134,6 +134,8 @@ function LoginPage() {
             fontSize: "16px",
             outline: "none",
             transition: "0.3s",
+            backgroundColor: "white",
+            color: "black",
           }}
           onFocus={(e) => (e.target.style.border = "2px solid #81c784")}
           onBlur={(e) => (e.target.style.border = "2px solid #c5e1a5")}
@@ -154,6 +156,8 @@ function LoginPage() {
             fontSize: "16px",
             outline: "none",
             transition: "0.3s",
+             backgroundColor: "white",
+             color: "black",
           }}
           onFocus={(e) => (e.target.style.border = "2px solid #81c784")}
           onBlur={(e) => (e.target.style.border = "2px solid #c5e1a5")}
@@ -175,7 +179,7 @@ function LoginPage() {
             transition: "all 0.3s ease",
           }}
           onMouseOver={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e7d32")
+            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e7d32") //hover effect
           }
           onMouseOut={(e) =>
             ((e.target as HTMLButtonElement).style.backgroundColor = "#43a047")
@@ -189,11 +193,11 @@ function LoginPage() {
         <button
           onClick={handleGoogleLogin}
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: "#ffffff2f",
             color: "#2e7d32",
             fontWeight: "bold",
             fontSize: "16px",
-            padding: "10px 20px",
+            padding: "5px 28px",
             borderRadius: "10px",
             border: "1px solid #ccc",
             display: "flex",
@@ -201,6 +205,9 @@ function LoginPage() {
             justifyContent: "center",
             gap: "10px",
             cursor: "pointer",
+            margin: "0 auto",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            transition: "all 0.3s ease",
           }}
         >
           <img src={GoogleLogo} alt="Google Logo" style={{ width: "30px", height: "30px" }} />

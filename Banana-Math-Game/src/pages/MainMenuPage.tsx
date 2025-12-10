@@ -4,8 +4,9 @@ import InstructionPage from "./InstructionPage";
 import LevelPage from "./LevelsPage";
 import SettingPage from "./SettingPage";
 import LeaderboardPage from "./LeaderBoardPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./profilePage";
 
+// Define the type for menu pages
 type MenuPage =
   | "game"
   | "instructions"
@@ -14,14 +15,14 @@ type MenuPage =
   | "leaderboard"
   | "profile";
 
-export default function MainMenu() {
-  const [activePage, setActivePage] = useState<MenuPage>("game");
+export default function MainMenu() {  // display profile page 
+  const [activePage, setActivePage] = useState<MenuPage>("profile");
 
   const renderPage = () => {
     switch (activePage) {
-      case "game":
-         return <GamePage selectedLevel="Easy" />;
+     
 
+      //swich case add active page defined
       case "instructions":
         return <InstructionPage />;
       case "levels":
@@ -32,8 +33,11 @@ export default function MainMenu() {
         return <LeaderboardPage />;
       case "profile":
          return <ProfilePage />;
+        //   case "game":
+        //  return <GamePage/>;
+
       default:
-            return <GamePage selectedLevel="Easy" />;
+            return <ProfilePage />;
 
     }
   };
@@ -54,49 +58,44 @@ export default function MainMenu() {
         }}
       >
         <h2 style={{ textAlign: "center", marginBottom: "30px" }}>
-          🍌 BananaMath
+          BananaMath
         </h2>
 
-        <button
-          style={menuButton}
-          onClick={() => setActivePage("game")}
-        >
-          🕹 Play Game
-        </button>
+      
 
         <button
           style={menuButton}
           onClick={() => setActivePage("instructions")}
         >
-          📘 Instructions
+          Instructions
         </button>
 
         <button
           style={menuButton}
           onClick={() => setActivePage("levels")}
         >
-          ⭐ Levels
+          Levels
         </button>
 
         <button
           style={menuButton}
           onClick={() => setActivePage("leaderboard")}
         >
-          🏆 Leaderboard
+          Leaderboard
         </button>
 
         <button
           style={menuButton}
           onClick={() => setActivePage("settings")}
         >
-          ⚙ Settings
+          Settings
         </button>
 
         <button
           style={menuButton}
           onClick={() => setActivePage("profile")}
         >
-          👤 Profile
+          Profile
         </button>
       </div>
 
