@@ -92,38 +92,10 @@ function InstructionPage() {
           <strong>4.)</strong> Review the instructions before starting to get the best results.
           <br />
           <br />
-           <b>Tap 'Start' to begin!</b>
+           
         </p>
 
-        <button
-          onClick={() => navigate("/levels")}
-          style={{
-            backgroundColor: "#3d7f59",
-            color: "white",
-            border: "none",
-            borderRadius: "10px",
-            padding: "14px 45px",
-            fontSize: "25px",
-            fontWeight: "bold",
-            cursor: "pointer",
-            boxShadow: "0 6px 15px rgba(0,0,0,0.2)",
-            transition: "transform 0.3s ease, background-color 0.3s ease",
-          }}
-          onMouseOver={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#2e6546")
-          }
-          onMouseOut={(e) =>
-            ((e.target as HTMLButtonElement).style.backgroundColor = "#3d7f59")
-          }
-          onMouseDown={(e) =>
-            ((e.target as HTMLButtonElement).style.transform = "scale(0.97)")
-          }
-          onMouseUp={(e) =>
-            ((e.target as HTMLButtonElement).style.transform = "scale(1)")
-          }
-        >
-          Start
-        </button>
+        
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ function SettingsPage() {
           textAlign: "center",
           width: "420px",
           backdropFilter: "blur(8px)",
-            position: "relative",
+          position: "relative",
           marginLeft: "20px",
           marginRight: "360px",
           marginBottom: "70px",
@@ -51,7 +51,7 @@ function SettingsPage() {
       >
         <h1
           style={{
-            fontSize: "40px",
+            fontSize: "50px",
             color: "#2b6e46",
             marginBottom: "35px",
             textShadow: "2px 2px 6px rgba(0,0,0,0.3)",

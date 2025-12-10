@@ -11,7 +11,8 @@ const firebaseConfig = {
   projectId: "banana-math-game-9cfe1",
   storageBucket: "banana-math-game-9cfe1.firebasestorage.app",
   messagingSenderId: "1077183373741",
-  appId: "1:1077183373741:web:38b751b3c87737929a0124"
+  appId: "1:1077183373741:web:38b751b3c87737929a0124",
+  databaseURL: "https://banana-math-game-9cfe1-default-rtdb.firebaseio.com",
 };
 
 
