@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SettingsBg from "../assets/loginpage.png";
 
@@ -9,12 +9,21 @@ function SettingsPage() {
   const [soundOn, setSoundOn] = useState(true);
   const [level, setLevel] = useState("Easy");
 
+  // ✅ Load previous settings from localStorage when component mounts
+  useEffect(() => {
+    const savedSound = localStorage.getItem("sound");
+    const savedLevel = localStorage.getItem("level");
+
+    if (savedSound) setSoundOn(savedSound === "on");
+    if (savedLevel) setLevel(savedLevel);
+  }, []);
+
   const handleSaveSettings = () => {
     localStorage.setItem("sound", soundOn ? "on" : "off");
     localStorage.setItem("level", level);
 
     alert(`Settings saved! 🔊 Sound: ${soundOn ? "On" : "Off"} | Level: ${level}`);
-    navigate("/"); // Go back to home or game page
+    navigate("/mainmenu"); // Go back to home or game page
   };
 
   return (
@@ -149,7 +158,7 @@ function SettingsPage() {
             ((e.target as HTMLButtonElement).style.transform = "scale(1)")
           }
         >
-          Save 
+          Save
         </button>
       </div>
     </div>

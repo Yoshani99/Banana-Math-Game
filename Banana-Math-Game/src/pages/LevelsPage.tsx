@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import LevelPageBg from "../assets/LoginPage.png";
 
-// type LevelType = "Easy" | "Medium" | "Hard";
+// ✅ STRONG LEVEL TYPE
+export type GameLevel = "Easy" | "Medium" | "Hard";
 
-function LevelPage() {
-  const [selectedLevel, setSelectedLevel] = useState("Easy");
-  const navigate = useNavigate();
+type Props = {
+  onSelectLevel: (level: GameLevel) => void;
+};
+
+function LevelPage({ onSelectLevel }: Props) {
+  // ✅ STRONG DEFAULT TYPE
+  const [selectedLevel, setSelectedLevel] = useState<GameLevel>("Easy");
 
   const handleConfirm = () => {
-    navigate("/game", {
-      
-      state: { selectedLevel },
-    });
-    console.log("Navigating to GamePage with level:", selectedLevel);
+    onSelectLevel(selectedLevel); // ✅ always safe
+    console.log("✅ Selected Level:", selectedLevel);
   };
+
+  const levels: GameLevel[] = ["Easy", "Medium", "Hard"];
 
   return (
     <div
@@ -38,12 +41,13 @@ function LevelPage() {
           textAlign: "center",
           backdropFilter: "blur(8px)",
           color: "#2e7d32",
-          marginRight: "300px", 
         }}
       >
-        <h1 style={{ fontSize: "50px", fontWeight: "800" }}>Select Level</h1>
+        <h1 style={{ fontSize: "50px", fontWeight: "800" }}>
+          Select Level
+        </h1>
 
-        {["Easy", "Medium", "Hard"].map((level) => (
+        {levels.map((level) => (
           <div
             key={level}
             onClick={() => setSelectedLevel(level)}
@@ -54,12 +58,12 @@ function LevelPage() {
               marginBottom: "18px",
               cursor: "pointer",
               backgroundColor:
-                selectedLevel === level ? "#92e887ff" : "rgba(255,255,255,0.8)",
+                selectedLevel === level
+                  ? "#92e887ff"
+                  : "rgba(255,255,255,0.8)",
               border: "2px solid #20cc68",
               borderRadius: "15px",
-            
             }}
-          
           >
             <span>{level}</span>
             {selectedLevel === level && <span>✔️</span>}
@@ -68,7 +72,6 @@ function LevelPage() {
 
         <button
           onClick={handleConfirm}
-          
           style={{
             backgroundColor: "#3d7f59",
             padding: "14px 40px",
@@ -78,7 +81,6 @@ function LevelPage() {
             cursor: "pointer",
           }}
         >
-          
           Confirm
         </button>
       </div>

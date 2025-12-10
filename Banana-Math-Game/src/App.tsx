@@ -1,4 +1,3 @@
-//import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -11,30 +10,40 @@ import LevelPage from "./pages/LevelsPage";
 import GamePage from "./pages/GamePage";
 import MainMenuPage from "./pages/MainMenuPage";
 
-
-// Import your pages
-
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const handleSelectLevel = (level: string) => {
+    // Handle level selection logic here
+    console.log("Selected level:", level);
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/Leaderboard" element={<Leaderboard />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Welcome />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/instructions" element={<InstructionPage />} />
         <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/level" element={<LevelPage />} />
-        <Route path="/game" element={<GamePage selectedLevel="Easy" />} />
+        <Route path="/level" element={<LevelPage onSelectLevel={handleSelectLevel} />} />
+        <Route path="/game" element={<GamePage />} />
         <Route path="/mainmenu" element={<MainMenuPage />} />
-        
-
       </Routes>
 
-    
+      {/* ✅ TOAST WORKS CORRECTLY FROM HERE */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
     </Router>
   );
 }

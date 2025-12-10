@@ -38,9 +38,11 @@ function LoginPage() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password); //sign in function
       const user = userCredential.user;
+localStorage.setItem("userUID", user.uid);
 
       localStorage.setItem("savedEmail", user.email || "");
       const token = await user.getIdToken();
+      console.log("Login successful, token:", token);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userEmail", user.email || "");
 
@@ -57,9 +59,11 @@ function LoginPage() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
+localStorage.setItem("userUID", user.uid);
 
         localStorage.setItem("savedEmail", user.email || "");
         user.getIdToken().then((token) => {
+          console.log("Google login successful, token:", token);
           localStorage.setItem("authToken", token);
           localStorage.setItem("userEmail", user.email || "");
           localStorage.setItem("username", user.displayName || "");

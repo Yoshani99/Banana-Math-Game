@@ -7,7 +7,7 @@ import BackgroundImg from "../assets/loginpage.png";
 interface UserData {
   username: string;
   completedLevel: string;
-  score: number;
+  highestScore: number;
 }
 
 function Profile() {
@@ -22,12 +22,17 @@ function Profile() {
           alert("Please log in first!");
           return;
         }
+        console.log("Fetching data for user:", user.uid);
+        
+       const userScore = doc(db, "userScores", user.uid);
+       const scoreSnap = await getDoc(userScore);
+        // const userRef = doc(db, "users", user.uid);
+        // const userSnap = await getDoc(userRef);
 
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
 
-        if (userSnap.exists()) {
-          setUserData(userSnap.data() as UserData);
+
+        if (scoreSnap.exists()) {
+          setUserData(scoreSnap.data() as UserData);
         } else {
           console.log("No user data found!");
         }
@@ -111,7 +116,7 @@ function Profile() {
                 color: "#333",
               }}
             >
-              <strong>Score:</strong> {userData.score}
+              <strong>Score:</strong> {userData.highestScore}
             </p>
           </div>
         ) : (
