@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LevelPageBg from "../assets/LoginPage.png";
-
-// ✅ STRONG LEVEL TYPE
+import InstructionPageBg from "../assets/LoginPage.png";
+// STRONG LEVEL TYPE
 export type GameLevel = "Easy" | "Medium" | "Hard";
 
 type Props = {
@@ -9,27 +9,28 @@ type Props = {
 };
 
 function LevelPage({ onSelectLevel }: Props) {
-  // ✅ STRONG DEFAULT TYPE
+  // STRONG DEFAULT TYPE
   const [selectedLevel, setSelectedLevel] = useState<GameLevel>("Easy");
 
   const handleConfirm = () => {
-    onSelectLevel(selectedLevel); // ✅ always safe
-    console.log("✅ Selected Level:", selectedLevel);
+    onSelectLevel(selectedLevel); // always safe
+    console.log("Selected Level:", selectedLevel);
   };
 
   const levels: GameLevel[] = ["Easy", "Medium", "Hard"];
 
   return (
     <div
-      style={{
+       style={{
         height: "100vh",
-        width: "100vw",
         backgroundImage: `url(${LevelPageBg})`,
-        backgroundSize: "cover",
+        fontFamily: "'Poppins', sans-serif",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontFamily: "'Poppins', sans-serif",
+        padding: "40px 20px",
+        width: "100vw",
+        position: "fixed",
       }}
     >
       <div
@@ -41,6 +42,10 @@ function LevelPage({ onSelectLevel }: Props) {
           textAlign: "center",
           backdropFilter: "blur(8px)",
           color: "#2e7d32",
+           position: "relative",
+          marginLeft: "20px",
+          marginRight: "360px",
+          marginBottom: "70px",
         }}
       >
         <h1 style={{ fontSize: "50px", fontWeight: "800" }}>

@@ -19,9 +19,9 @@ function Leaderboard() {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        console.log("🔥 Fetching leaderboard scores...");
+        console.log("Fetching leaderboard scores...");
         const q = query(collection(db, "scores"));
-        console.log("🔥 Query constructed:", q);
+        console.log("Query constructed:", q);
         const snapshot = await getDocs(q);
         const list: Score[] = snapshot.docs.map((doc) => doc.data() as Score);
         setScores(list);
@@ -35,17 +35,20 @@ function Leaderboard() {
 
   return (
     <div
-      style={{
+  
+
+
+
+           style={{
         height: "100vh",
-        width: "100vw",
         backgroundImage: `url(${BackgroundImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         fontFamily: "'Poppins', sans-serif",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "40px 20px",
+        width: "100vw",
+        position: "fixed",
       }}
     >
       <div
@@ -57,7 +60,7 @@ function Leaderboard() {
           boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
           width: "400px",
           backdropFilter: "blur(8px)",
-             position: "relative",
+          position: "relative",
           marginLeft: "20px",
           marginRight: "360px",
           marginBottom: "70px",

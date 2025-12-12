@@ -6,27 +6,34 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+
+
+//  import eye icons(React, Firebase Auth, Firestore, Navigation, Toast, Google Logo, Password Eye Icons import)
+
 import { setDoc, doc } from "firebase/firestore";
 import SignUpPageBg from "../assets/LoginPage.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import GoogleLogo from "../assets/google-logo.png";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // 👈 import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa"; //  import eye icons
 
+
+/*use state variables */
 function SignUp() {
   const [email, setEmail] = useState<string>("");
+  
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
-  // 👀 password visibility states
+  // password visibility states
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  // ✅ NORMAL EMAIL SIGNUP
+  // NORMAL EMAIL SIGNUP
   const handleSignUp = async () => {
     try {
       if (!username || !email || !password || !confirmPassword) {
@@ -98,7 +105,7 @@ function SignUp() {
     }
   };
 
-  // ✅ GOOGLE SIGNUP
+  // GOOGLE SIGNUP
   const handleGoogleSignUp = async () => {
     try {
       setLoading(true);
@@ -301,7 +308,7 @@ function SignUp() {
   );
 }
 
-// ✅ Input Style Reusable
+// Input Style Reusable
 const inputStyle = {
   display: "block",
   width: "100%",

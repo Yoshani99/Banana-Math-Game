@@ -10,6 +10,7 @@ import wrongSound from "../assets/sounds/buzzer-or-wrong-answer-20582.mp3";
 import gameOverSound from "../assets/sounds/game-over-deep-male-voice-clip-352695.mp3";
 import clickSound from "../assets/sounds/computer-mouse-click-351398.mp3";
 import backgroundMusic from "../assets/sounds/game-music-loop-3-144252.mp3";
+import firebase from "firebase/compat/app";
 
 type LevelType = "Easy" | "Medium" | "Hard";
 
@@ -17,7 +18,7 @@ interface GamePageProps {
   selectedLevel: LevelType;
 }
 
-// ✅ Sound Effects (UNCHANGED)
+// Sound Effects (UNCHANGED)
 const correctAudio = new Audio(correctSound);
 const wrongAudio = new Audio(wrongSound);
 const gameOverAudio = new Audio(gameOverSound);
@@ -36,6 +37,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
     Hard: 3,
   };
 
+  /*Use States use variable*/
   const [timeLeft, setTimeLeft] = useState(levelTimes[selectedLevel]);
   const [lives, setLives] = useState(levelLives[selectedLevel]);
   const [imageData, setImageData] = useState<any>(null);
@@ -51,9 +53,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const navigate = useNavigate();
 
-  /* ===============================
-     ✅✅✅ BACKGROUND MUSIC FIX ✅✅✅
-     =============================== */
+  /* Background Music*/
   const backgroundAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -83,6 +83,9 @@ function GamePage({ selectedLevel }: GamePageProps) {
     }
   }, [soundOn]);
 
+
+ /* save score to firebase*/
+
  const saveScore = async (scoreToAdd: number) => {
   try {
     const user = auth.currentUser;
@@ -91,7 +94,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
     const username = user.displayName || "Player";
     const userId = user.uid;
 
-    // 🔹 OLD COLLECTION (username-based) — UNCHANGED
+    // OLD COLLECTION (username-based) — UNCHANGED
     const userRef = doc(db, "scores", username);
     const userDoc = await getDoc(userRef);
 
@@ -106,7 +109,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
       userId,
     });
 
-    // 🔹 ✅ NEW COLLECTION (userId-based)
+    // NEW COLLECTION (userId-based)
     const userIdRef = doc(db, "userScores", userId);
     const userIdDoc = await getDoc(userIdRef);
 
@@ -123,11 +126,11 @@ function GamePage({ selectedLevel }: GamePageProps) {
 
     setCurrentScore(newScore);
   } catch (error) {
-    console.error("❌ Error saving score:", error);
+    console.error("Error saving score:", error);
   }
 };
 
-  // ✅ FETCH PUZZLE
+  // FETCH PUZZLE(Banana API)
   const fetchImage = async () => {
     try {
       const res = await fetch("https://marcconrad.com/uob/banana/api.php");
@@ -143,7 +146,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
     fetchImage();
   }, []);
 
-  // ✅ TIMER
+  //TIMER
   useEffect(() => {
     if (lives === 0) return;
 
@@ -167,7 +170,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
     return () => clearInterval(timerRef.current!);
   }, [lives, soundOn]);
 
-  // ✅ ANSWER SELECTION
+  //  ANSWER SELECTION
   const handleAnswerSelection = (number: number) => {
     if (!imageData || lives === 0) return;
 
@@ -209,7 +212,7 @@ function GamePage({ selectedLevel }: GamePageProps) {
     }
   };
 
-  // ✅ RESTART
+  // RESTART
   const handleRestart = () => {
     setLives(levelLives[selectedLevel]);
     setTimeLeft(levelTimes[selectedLevel]);
@@ -259,6 +262,10 @@ function GamePage({ selectedLevel }: GamePageProps) {
       borderRadius: "25px",
       padding: "30px",
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+       position: "relative",
+          marginLeft: "20px",
+          marginRight: "360px",
+          marginBottom: "70px",
     }}
   >
     {/* Your content here */}
@@ -346,10 +353,10 @@ function GamePage({ selectedLevel }: GamePageProps) {
           )}
 
           {isCorrect === true && (
-            <p className="text-green-600 text-2xl font-bold">✅ Correct!</p>
+            <p className="text-green-600 text-2xl font-bold">Correct!</p>
           )}
           {isCorrect === false && (
-            <p className="text-red-600 text-2xl font-bold">❌ Wrong!</p>
+            <p className="text-red-600 text-2xl font-bold">Wrong!</p>
           )}
         </div>
         </div>

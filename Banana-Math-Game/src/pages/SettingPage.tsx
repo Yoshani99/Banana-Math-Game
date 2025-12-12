@@ -5,11 +5,11 @@ import SettingsBg from "../assets/loginpage.png";
 function SettingsPage() {
   const navigate = useNavigate();
 
-  // 🎵 State for sound toggle and level selection
+  // State for sound toggle and level selection
   const [soundOn, setSoundOn] = useState(true);
   const [level, setLevel] = useState("Easy");
 
-  // ✅ Load previous settings from localStorage when component mounts
+  // Load previous settings from localStorage when component mounts
   useEffect(() => {
     const savedSound = localStorage.getItem("sound");
     const savedLevel = localStorage.getItem("level");
@@ -22,24 +22,22 @@ function SettingsPage() {
     localStorage.setItem("sound", soundOn ? "on" : "off");
     localStorage.setItem("level", level);
 
-    alert(`Settings saved! 🔊 Sound: ${soundOn ? "On" : "Off"} | Level: ${level}`);
+    alert(`Settings saved! Sound: ${soundOn ? "On" : "Off"} | Level: ${level}`);
     navigate("/mainmenu"); // Go back to home or game page
   };
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        width: "100vw",
+    
+           style={{
+        height: "100vh",
         backgroundImage: `url(${SettingsBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         fontFamily: "'Poppins', sans-serif",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "30px",
+        padding: "40px 20px",
+        width: "100vw",
         position: "fixed",
       }}
     >
@@ -52,7 +50,7 @@ function SettingsPage() {
           textAlign: "center",
           width: "420px",
           backdropFilter: "blur(8px)",
-          position: "relative",
+           position: "relative",
           marginLeft: "20px",
           marginRight: "360px",
           marginBottom: "70px",

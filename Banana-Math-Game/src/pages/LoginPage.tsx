@@ -7,8 +7,10 @@ import GoogleLogo from "../assets/google-logo.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
+//variable store
 function LoginPage() {
-  const [email, setEmail] = useState<string>(""); //variable store
+  const [email, setEmail] = useState<string>(""); 
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
@@ -53,7 +55,9 @@ localStorage.setItem("userUID", user.uid);
     }
   };
 
-  const handleGoogleLogin = () => {   //firebase google login
+
+  //firebase google login
+  const handleGoogleLogin = () => {   
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)

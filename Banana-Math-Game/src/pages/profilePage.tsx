@@ -48,17 +48,16 @@ function Profile() {
 
   return (
     <div
-      style={{
+   
+           style={{
         height: "100vh",
-        width: "100vw",
         backgroundImage: `url(${BackgroundImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         fontFamily: "'Poppins', sans-serif",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "40px 20px",
+        width: "100vw",
         position: "fixed",
       }}
     >
@@ -73,8 +72,8 @@ function Profile() {
           backdropFilter: "blur(8px)",
            position: "relative",
           marginLeft: "20px",
-          marginRight: "300px",
-          marginBottom: "50px",
+          marginRight: "360px",
+          marginBottom: "70px",
         }}
       >
         <h2

@@ -20,7 +20,7 @@ type MenuPage =
   | "leaderboard"
   | "profile";
 
-// ✅ STRONG LEVEL TYPE
+// STRONG LEVEL TYPE
 type GameLevel = "Easy" | "Medium" | "Hard";
 
 export default function MainMenu() {
@@ -28,10 +28,10 @@ export default function MainMenu() {
   const [userData, setUserData] = useState<any>(null);
   const navigate = useNavigate();
 
-  // ✅ FIXED: STRONG TYPE + NULL SAFE
+  //  FIXED: STRONG TYPE + NULL SAFE
   const [selectedLevel, setSelectedLevel] = useState<GameLevel | null>(null);
 
-  // ✅ LOAD USER DATA
+  //  LOAD USER DATA
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -60,10 +60,10 @@ export default function MainMenu() {
       case "levels":
         return (
           <LevelPage
-            // ✅ FIXED: STRONG LEVEL TYPE
+            // FIXED: STRONG LEVEL TYPE
             onSelectLevel={(level: GameLevel) => {
               setSelectedLevel(level);
-              setActivePage("game"); // ✅ AUTO LOAD GAME
+              setActivePage("game"); // AUTO LOAD GAME
             }}
           />
         );
@@ -78,7 +78,7 @@ export default function MainMenu() {
         return <ProfilePage />;
 
       case "game":
-        // ✅ FIXED: NEVER ALLOW NULL TO REACH GAMEPAGE
+        // FIXED: NEVER ALLOW NULL TO REACH GAMEPAGE
         return <GamePage selectedLevel={selectedLevel || "Easy"} />;
 
       default:
@@ -98,7 +98,7 @@ export default function MainMenu() {
 
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw" }}>
-      {/* ✅ LEFT MENU */}
+      {/* LEFT MENU */}
       <div
         style={{
           width: "250px",
@@ -112,7 +112,7 @@ export default function MainMenu() {
       >
         <h2 style={{ textAlign: "center" }}>BananaMath</h2>
 
-        {/* ✅ USER PROFILE BOX */}
+        {/*  USER PROFILE BOX */}
         {userData && (
           <div
             style={{
@@ -187,7 +187,7 @@ export default function MainMenu() {
         </button>
       </div>
 
-      {/* ✅ RIGHT CONTENT */}
+      {/*  RIGHT CONTENT */}
       <div style={{ flex: 2, backgroundColor: "#E8F5E9" }}>{renderPage()}</div>
     </div>
   );
